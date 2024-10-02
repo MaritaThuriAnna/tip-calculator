@@ -3,6 +3,9 @@ const tipButtons = document.querySelectorAll('.tip-btn');
 const customTipInput = document.getElementById('customTipButton');
 const calculateBtn = document.getElementById('calculateButton');
 const resetBtn = document.getElementById('resetButton');
+const tipAmountDisplay = document.getElementById('tipAmount');
+const finalBillDisplay = document.getElementById('finalAmount');
+
 
 let isCustomTip = false;
 let tipPercentage = 0;
@@ -52,9 +55,15 @@ calculateBtn.addEventListener('click', function () {
 
     if (!isNaN(billTotal) && billTotal > 0) {
         console.log("Entered bill total: " + billTotal.toFixed(2));
+
         let tip = calcTipAmount(billTotal, tipPercentage);
         sum = billTotal + tip;
+        
         console.log("Sum to pay: " + sum);
+
+        tipAmountDisplay.textContent = tip.toFixed(2);
+        finalBillDisplay.textContent = sum.toFixed(2);
+
     } else {
         console.log("Please enter a valid bill amount.");
     }
@@ -66,5 +75,9 @@ resetBtn.addEventListener('click', function () {
     tipPercentage = 0;
     tipButtons.forEach(button => button.classList.remove('active'));
 
+    tipAmountDisplay.textContent = '0.00';
+    finalBillDisplay.textContent = '0.00';
+
     console.log("Form has been reset.");
 });
+
