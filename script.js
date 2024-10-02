@@ -1,5 +1,6 @@
 const amountInput = document.getElementById('amount');
 const tipButtons = document.querySelectorAll('.tip-btn');
+const customTipInput  = document.getElementById('customTipButton');
 
 
 function calcTipAmount(billTotal, tipPercentage){
@@ -25,4 +26,15 @@ tipButtons.forEach(button => {
 
         console.log("Selected tip percentage: " + tipPercentage );
     });
+});
+
+customTipInput.addEventListener('input', function(){
+    const customTipVal = parseFloat(customTipInput.value);
+
+    if (!isNaN(customTipVal) && customTipVal >= 0 && customTipVal <= 100){
+        console.log("Custom tip amount: " + customTipVal);
+    } 
+    else{
+        console.log("Please enter a valid tip amount between 0 and 100!");
+    }
 });
