@@ -7,6 +7,15 @@ const tipAmountDisplay = document.getElementById('tipAmount');
 const finalBillDisplay = document.getElementById('finalAmount');
 
 
+const tippingDetails = document.getElementById('tipping-details');
+const splitAmountDisplay = document.getElementById('split-amount');
+const personTippingAmountDisplay = document.getElementById('person-tipping-amount');
+const otherPersonAmountDisplay = document.getElementById('other-person-amount');
+
+const partySizeInput = document.getElementById('partySize');
+const onePersonTipCheckbox = document.getElementById('onePersonTip');
+const splitEquallyCheckbox = document.getElementById('splitEqually');
+const splitDetails = document.getElementById('split-details');
 let isCustomTip = false;
 let tipPercentage = 0;
 
@@ -52,18 +61,40 @@ function calcTipAmount(billTotal, tipPercentage) {
 
 calculateBtn.addEventListener('click', function () {
     const billTotal = parseFloat(amountInput.value);
+    const partySize = parseInt(partySizeInput.value) || 1; 
+    const onePersonTips = onePersonTipCheckbox.checked; 
+    const splitEqually = splitEquallyCheckbox.checked; 
 
     if (!isNaN(billTotal) && billTotal > 0) {
         console.log("Entered bill total: " + billTotal.toFixed(2));
 
-        let tip = calcTipAmount(billTotal, tipPercentage);
-        sum = billTotal + tip;
+        const tip = calcTipAmount(billTotal, tipPercentage);
+        const totalAmount = billTotal + tip;
         
-        console.log("Sum to pay: " + sum);
+        if (onePersonTips) {
+            const billPerPerson = billTotal / partySize;
+            const personTippingAmount = billPerPerson + tip; 
+            const otherPersonAmount = billPerPerson.toFixed(2); 
+            
+            personTippingAmountDisplay.textContent = personTippingAmount.toFixed(2);
+            otherPersonAmountDisplay.textContent = otherPersonAmount; 
+            tippingDetails.style.display = 'block'; 
+            splitDetails.style.display = 'none'; 
+
+        } else if (splitEqually) {
+            const splitAmount = (totalAmount / partySize).toFixed(2); 
+            splitAmountDisplay.textContent = splitAmount; 
+            splitDetails.style.display = 'block'; 
+            tippingDetails.style.display = 'none'; 
+        } else {
+            tippingDetails.style.display = 'none';
+            splitDetails.style.display = 'none';
+        }
 
         tipAmountDisplay.textContent = tip.toFixed(2);
-        finalBillDisplay.textContent = sum.toFixed(2);
+        finalBillDisplay.textContent = totalAmount.toFixed(2);
 
+        console.log("Sum to pay: " + totalAmount);
     } else {
         console.log("Please enter a valid bill amount.");
     }
@@ -77,6 +108,13 @@ resetBtn.addEventListener('click', function () {
 
     tipAmountDisplay.textContent = '0.00';
     finalBillDisplay.textContent = '0.00';
+
+    partySizeInput.value = '1';
+    personTippingAmountDisplay.textContent = '0.00'; 
+    otherPersonAmountDisplay.textContent = '0.00'; 
+    splitAmountDisplay.textContent = '0.00'; 
+    tippingDetails.style.display = 'none'; 
+    splitDetails.style.display = 'none'; 
 
     console.log("Form has been reset.");
 });

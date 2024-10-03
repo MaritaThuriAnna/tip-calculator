@@ -41,9 +41,13 @@
         <div class="result" id="result">
             <p>Tip: <span id="tipAmount">0.00</span></p>
             <p>Total: <span id="finalAmount">0.00</span></p>
+            
             <p id="tipping-details" style="display:none;">
-                Person who tips pays: $<span id="person-tipping-amount">0.00</span><br>
-                Each other person pays: $<span id="other-person-amount">0.00</span>
+                Person who tips pays: <span id="person-tipping-amount">0.00</span><br>
+                Each other person pays: <span id="other-person-amount">0.00</span>
+            </p>
+            <p id="split-details" style="display:none;">
+                Each person pays: <span id="split-amount">0.00</span>
             </p>
         </div>
 
@@ -54,6 +58,11 @@
 
         <div class="input-group">
             <label><input type="checkbox" id="onePersonTip" /> One Person Tips</label>
+        </div>
+
+        <div class="input-group">
+            <label><input type="checkbox" id="splitEqually"/> Split Equally </label>
+            
         </div>
 
     </div>
