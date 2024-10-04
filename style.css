@@ -2,12 +2,24 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
+
+    background-image: url('bg.png');
+    background-size: cover;
+    background-position: center; 
+    background-repeat: no-repeat;
+
     display: flex;
     flex-direction: column;
     height: 100vh;
     justify-content: center;
     align-items: center;
     margin: 30px;
+}
+
+.container{
+    background-color: #7495a6;
+    padding: 10px;
+    border-radius: 10px;
 }
 
 h1 {
@@ -39,7 +51,7 @@ input[type="number"] {
 .tip-btn {
     flex: 1 1 45%;
     padding: 10px;
-    background-color: #d0bfbf;
+    background-color: #d0885e;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -47,7 +59,7 @@ input[type="number"] {
 }
 
 .tip-btn.active {
-    background-color: #4CAF50;
+    background-color: #ac637f;
     color: white;
 }
 
